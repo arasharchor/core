@@ -55,12 +55,13 @@ type Workspace struct {
 }
 
 type WorkspaceSpec struct {
-	Arguments             *Arguments                     `json:"arguments" protobuf:"bytes,1,opt,name=arguments"`
-	Containers            []corev1.Container             `json:"containers" protobuf:"bytes,3,opt,name=containers"`
-	Ports                 []corev1.ServicePort           `json:"ports" protobuf:"bytes,4,opt,name=ports"`
-	Routes                []*networking.HTTPRoute        `json:"routes" protobuf:"bytes,5,opt,name=routes"`
-	VolumeClaimTemplates  []corev1.PersistentVolumeClaim `json:"volumeClaimTemplates" protobuf:"bytes,6,opt,name=volumeClaimTemplates"`
-	PostExecutionWorkflow *wfv1.WorkflowTemplateSpec     `json:"postExecutionWorkflow" protobuf:"bytes,7,opt,name=postExecutionWorkflow"`
+	TerminationGracePeriodSeconds *int64
+	Arguments                     *Arguments                     `json:"arguments" protobuf:"bytes,1,opt,name=arguments"`
+	Containers                    []corev1.Container             `json:"containers" protobuf:"bytes,3,opt,name=containers"`
+	Ports                         []corev1.ServicePort           `json:"ports" protobuf:"bytes,4,opt,name=ports"`
+	Routes                        []*networking.HTTPRoute        `json:"routes" protobuf:"bytes,5,opt,name=routes"`
+	VolumeClaimTemplates          []corev1.PersistentVolumeClaim `json:"volumeClaimTemplates" protobuf:"bytes,6,opt,name=volumeClaimTemplates"`
+	PostExecutionWorkflow         *wfv1.WorkflowTemplateSpec     `json:"postExecutionWorkflow" protobuf:"bytes,7,opt,name=postExecutionWorkflow"`
 }
 
 // GetURL returns a url that can be used to access the workspace in a browser.
@@ -131,7 +132,7 @@ func getWorkspaceColumnsMap(camelCase bool) map[string]string {
 		"labels":     "labels",
 		"name":       "name",
 		"uid":        "uid",
-		"namespace": "namespace",
+		"namespace":  "namespace",
 		"phase":      "phase",
 		"parameters": "parameters",
 	}

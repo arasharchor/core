@@ -446,6 +446,7 @@ func createStatefulSetManifest(spec *WorkspaceSpec, config map[string]string, se
 			},
 		},
 		Spec: corev1.PodSpec{
+			TerminationGracePeriodSeconds: spec.TerminationGracePeriodSeconds,
 			NodeSelector: map[string]string{
 				"{{workflow.parameters.sys-node-pool-label}}": "{{workflow.parameters.sys-node-pool}}",
 			},
